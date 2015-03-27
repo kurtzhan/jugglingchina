@@ -1,4 +1,7 @@
 "zh-CN":
+  will_paginate:
+    previous_label: "上一页"
+    next_label: "下一页"
   date:
     formats:
       default: "%Y-%m-%d"
@@ -37,16 +40,19 @@
       x_seconds:
         one: '1 秒'
         other: '%{count} 秒'
-      less_than_x_seconds:
+      less_than_x_minutes:
         zero: 'less than a 分'
         one: '1 分'
         other: '%{count} 分'
       x_seconds:
         one: '1 分'
         other: '%{count} 分'
+      x_minutes:
+        one: '1分钟'
+        other: '%{count}分钟'
       about_x_hours:
-        one: 'about 1 小时'
-        other: '%{count} 小时'
+        one: 'about 1小时'
+        other: '%{count}小时'
       x_days:
         one: '1 天'
         other: '%{count} 天'
@@ -74,10 +80,19 @@
         precision: 2
         format: '%u %n'
 
-  active_record:
-    error:
+  activerecord:
+    errors:
       header_message: ["无法保存%{object_name}: 1 个错误", "无法保存%{object_name}: %{count} errors."]
       message: "请检查如下表单:"
+      models:
+        user:
+          attributes:
+            login: 
+              taken: 已存在
+            email:
+              taken: 已存在
+            password:
+              confirmation: 输入密码不一致
     error_messages:
       inclusion: "不在列表中"
       exclusion: "不可用"
@@ -100,6 +115,33 @@
       even: "必须是偶数"
 
   txt:
+    forums: "论坛"
+    users: "用户"
+    search: "搜索"
+    settings: "设置"
+    logout: "退出"
+    new_topic: "新建主题"
+    topic: "标题"
+    posts: "回复"
+    views: "查看"
+    latest_post: "最近回复"
+    login: "登陆"
+    login_name: 用户名
+    password: "密码"
+    post_age: "%{when}前"
+    latest_post_time: 回复时间
+    latest_post_user: 回复者
+    view: 查看
+    user_is_administrator: 管理员
+    tags: 标签
+    locations: 地点
+    your_tags: 你的标签
+    your_locations: 你的地点
+    new_practice_log: 新建练习日志
+    log: 练习日志
+    minutes: 分钟
+    edit: 编辑
+    delete: 删除
     count_forums:
       zero: "无子版面"
       one: "1个子版面"
@@ -136,5 +178,8 @@
     views_users:
       email_directions: 请输入您的email, 我们会发送给您一个新的用户名。以此登录后，请重新修改密码。
       reset_password: 重置密码
-
+    views_topics:
+      topic: "标题"
+      body: "内容"
+    
 
