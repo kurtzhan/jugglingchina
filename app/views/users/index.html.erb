@@ -22,6 +22,7 @@
 	<% end %>
     <th><%= I18n.t 'txt.views_users.website_title', :default => 'Website' %></th>
     <th width="1%"><%= I18n.t 'txt.views_users.posts_title', :default => 'Posts' %></th>
+    <th width="1%"><%= I18n.t 'txt.views_users.logss_title', :default => 'Logs' %></th>
   </tr>
 <% @users.each do |user|%>  
   <tr>
@@ -38,7 +39,8 @@
         <%= sanitize link_to(user.website.gsub("http://",""), "http://" + user.website.gsub("http://","")) %>
       <% end %>
     </td>
-    <td class="ca inv"><%= user.posts.size %></td>
+    <td class="ca inv"><%= user.posts_count > 0 ? link_to(user.posts_count, user_posts_path(user)) : user.posts_count %></td>
+    <td class="ca inv"><%= user.logs_count > 0 ? link_to(user.logs_count, user_logs_path(user)) : user.logs_count %></td>
   </tr>
 <% end %>
 </table>

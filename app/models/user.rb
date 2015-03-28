@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  concerned_with :states, :activation, :posting, :validation
+  concerned_with :states, :activation, :posting, :validation, :logging
   formats_attributes :bio
 
   belongs_to :site, :counter_cache => true
@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
 
   has_many :posts, :order => "#{Post.table_name}.created_at desc"
   has_many :topics, :order => "#{Topic.table_name}.created_at desc"
+  
+  has_many :locations, :order => "#{Location.table_name}.created_at desc"
+  has_many :tags, :order => "#{Tag.table_name}.created_at desc"
+  has_many :logs
 
   has_many :moderatorships, :dependent => :delete_all
   has_many :forums, :through => :moderatorships, :source => :forum do
@@ -84,5 +88,9 @@ class User < ActiveRecord::Base
     options[:except] ||= []
     options[:except] += [:email, :login_key, :login_key_expires_at, :password_hash, :openid_url, :activated, :admin]
     super
+  end
+  
+  def normalize_friendly_id(input)
+    input.to_s.to_slug.normalize.to_s
   end
 end

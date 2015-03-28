@@ -7,13 +7,13 @@ module UsersHelper
 
   # todo: cache this?
   def active_user_count
-    count = current_site.users.where("posts_count > 0").count
+    count = current_site.users.where("posts_count > 0 or logs_count > 0").count
     I18n.t 'txt.count_users_active', :count => count, :num => number_with_delimiter(count)
   end
 
   # todo: cache this?
   def lurking_user_count
-    count = current_site.users.where(:posts_count => 0).count
+    count = current_site.users.where(:posts_count => 0, :logs_count => 0).count
     I18n.t 'txt.count_users_lurking', :count => count, :num => number_with_delimiter(count)
   end
 

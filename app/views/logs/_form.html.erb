@@ -1,0 +1,62 @@
+<%= form_for(@log) do |f| %>
+  <% if @log.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@log.errors.count, "error") %> prohibited this log from being saved:</h2>
+
+      <ul>
+      <% @log.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.text_field :date %>
+  </div>
+  <div class="field">
+    <%= f.label I18n.t('txt.tags', :default =>'tags') %><br />
+    <%= f.text_field :tags %>
+  </div>
+  <% if current_user.tags.length > 0 %>
+  <div class="small_print">
+    <%= f.label I18n.t('txt.your_tags', :default =>'your tags') %>
+    <% current_user.tags.each do |tag| %>
+    <span style="margin-right:5px;"><a class="add_tag" href="#"><%= tag.name %></a></span>  
+    <% end %>
+  </div>
+  <script>
+    $$('a.add_tag').each(function(a){
+      $(a).observe('click', function(){
+        $("log_tags").value = $(a).innerHTML;
+        return false;
+      });
+    });
+  </script>
+  <% end %>
+  <div class="field">
+    <%= f.label I18n.t('txt.locations', :default =>'locations') %><br />
+    <%= f.text_field :location %>
+  </div>
+  <% if current_user.locations.length > 0 %>
+  <div class="small_print">
+    <%= f.label I18n.t('txt.your_locations', :default =>'your locations') %>
+    <% current_user.locations.each do |location| %>
+    <span style="margin-right:5px;"><a class="add_location" href="#"><%= location.name %></a></span>  
+    <% end %>
+  </div>
+  <% end %>
+  <div class="field">
+    <%= f.label I18n.t('txt.minutes', :default =>'Minutes') %><br />
+    <%= f.text_field :minutes %>
+  </div>
+  <div class="field">
+    <%= f.label I18n.t('txt.log_description', :default =>'description') %><br />
+    <%= f.text_area :description, :rows => 7 %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+

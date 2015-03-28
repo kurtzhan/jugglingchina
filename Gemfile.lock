@@ -6,7 +6,7 @@ GIT
     will_paginate (3.0.pre3)
 
 GEM
-  remote: http://rubygems.org/
+  remote: http://ruby.taobao.org/
   specs:
     RedCloth (4.2.9)
     ZenTest (4.5.0)
@@ -43,6 +43,7 @@ GEM
     arel (2.0.10)
     autotest (4.4.6)
       ZenTest (>= 4.4.1)
+    babosa (0.3.11)
     bluecloth (2.1.0)
     builder (2.1.2)
     diff-lcs (1.1.2)
@@ -118,6 +119,7 @@ DEPENDENCIES
   acts_as_list
   acts_as_state_machine
   autotest
+  babosa (~> 0.3.9)
   bluecloth
   friendly_id (~> 4.0.0.rc2)
   highline
