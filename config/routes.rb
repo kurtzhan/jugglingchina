@@ -1,4 +1,12 @@
 AlteredBeast::Application.routes.draw do
+  resources :logs
+
+  resources :tags
+
+  resources :locations
+
+  resources :users
+
   get '/session' => "sessions#create", :as => 'open_id_complete'
 
   resources :sites, :moderatorships, :monitorship
@@ -23,6 +31,7 @@ AlteredBeast::Application.routes.draw do
     resources :posts, :only => [:index] do
 #      get :monitored, :on => :collection, :shallow => true
     end
+    resources :logs
   end
   match '/users/:user_id/monitored(.:format)' => 'posts#monitored', :as => 'monitored_posts'
 

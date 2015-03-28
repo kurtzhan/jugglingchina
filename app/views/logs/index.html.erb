@@ -1,0 +1,61 @@
+<% heading = I18n.t 'txt.log', :default => 'Practice Logs' %>
+<% if params[:user_id] %>
+  <% user = User.find params[:user_id] %>
+  <% heading = user.login + heading %>
+<% end %>
+<h1><%= heading %></h1>
+<%
+  log_hash_by_date = {}
+  @logs.each do |log|
+    log_hash_by_date[log.date] ||= []
+    log_hash_by_date[log.date] << log
+  end
+%>
+<% log_hash_by_date.keys.each do |date| %>
+<div style="margin-top:20px;"><%= link_to date, logs_path(:date => date) %></div>
+  <% log_hash_by_date[date].each do |log| %>
+<div style="background:#F3F3F3;margin:10px 0px; padding: 10px;font-size:0.8em;border-radius:10px;">
+  <div><%= link_to log.user.login, user_logs_path(log.user) %></div>
+  <div>
+  <% log.tags.split(",").map(&:strip).each do |tag| %>
+    <%= link_to tag, logs_path(:tag => tag) %>,
+  <% end %>
+  <%= log.minutes %><%= I18n.t 'txt.minutes', :default => 'Minutes' %>
+  <% if current_user && (current_user.id == log.user.id || current_user.admin?) %>
+  <%= link_to I18n.t('txt.edit', :default => 'Edit'), edit_log_path(log) %>
+  <%= link_to I18n.t('txt.delete', :default => 'Delete'), log, :confirm => 'Are you sure?', :method => :delete %>
+  <% end %>
+  </div>
+  <% if log.description %>
+  <div><%= log.description %></div>
+  <% end %>
+  <% if log.location %>
+  <div><%= I18n.t 'txt.locations', :default => 'Location' %>: <%= log.location %></div>
+  <% end %>
+</div>
+  <% end %>
+<% end %>
+
+<br />
+<% if current_site and logged_in? %>
+<%= link_to 'New Log', new_log_path %>
+<% end %>
+<% content_for :right do %>
+<table style="font-size:0.8em;width:100%;background:#ffffff;">
+  <tr>
+    <th>Rank</th>
+    <th>User</th>
+    <th>Total days</th>
+    <th>Total hours</th>
+  </tr>
+
+<% @log_summary.each_with_index do |log, index| %>
+  <tr>
+    <td><%= index + 1 %></td>
+    <td><%= link_to log.user.login, user_logs_path(log.user) %></td>
+    <td><%= log.total_days %></td>
+    <td style="background:#eee"><%= (log.total_minutes / 60).round(1) %></td>
+  </tr>
+<% end %>
+</table>
+<% end %>

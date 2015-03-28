@@ -71,6 +71,11 @@ class Topic < ActiveRecord::Base
   def to_param
     permalink
   end
+  
+  def normalize_friendly_id(input)
+    input.to_s.to_slug.normalize.to_s
+  end
+
 
   protected
 
