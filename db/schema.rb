@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090317123901) do
+ActiveRecord::Schema.define(:version => 9) do
 
   create_table "brain_busters", :force => true do |t|
     t.string "question"
@@ -32,6 +32,24 @@ ActiveRecord::Schema.define(:version => 20090317123901) do
 
   add_index "forums", ["position", "site_id"], :name => "index_forums_on_position_and_site_id"
   add_index "forums", ["site_id", "permalink"], :name => "index_forums_on_site_id_and_permalink"
+
+  create_table "locations", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "logs", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "tags"
+    t.string   "location"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
+    t.integer  "minutes"
+  end
 
   create_table "moderatorships", :force => true do |t|
     t.integer  "forum_id"
@@ -94,6 +112,13 @@ ActiveRecord::Schema.define(:version => 20090317123901) do
     t.text     "tagline"
   end
 
+  create_table "tags", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "topics", :force => true do |t|
     t.integer  "forum_id"
     t.integer  "user_id"
@@ -139,6 +164,7 @@ ActiveRecord::Schema.define(:version => 20090317123901) do
     t.string   "bio"
     t.string   "display_name"
     t.string   "permalink"
+    t.integer  "logs_count",                              :default => 0
   end
 
   add_index "users", ["last_seen_at"], :name => "index_users_on_last_seen_at"
