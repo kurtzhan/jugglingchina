@@ -46,6 +46,10 @@ GEM
     babosa (0.3.11)
     bluecloth (2.1.0)
     builder (2.1.2)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.7)
+      climate_control (>= 0.0.3, < 1.0)
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -60,6 +64,11 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.17.2)
     mysql2 (0.2.7)
+    paperclip (4.2.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     polyglot (0.3.3)
     rack (1.2.4)
     rack-mount (0.6.14)
@@ -124,6 +133,7 @@ DEPENDENCIES
   friendly_id (~> 4.0.0.rc2)
   highline
   mysql2 (~> 0.2.7)
+  paperclip (~> 4.2)
   rack-openid
   rails (~> 3.0.7)
   rails3-generators

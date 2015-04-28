@@ -12,6 +12,7 @@ gem 'acts_as_list'
 gem 'acts_as_state_machine'
 gem 'friendly_id', '~>4.0.0.rc2'
 gem "babosa", '~>0.3.9'
+gem "paperclip", "~> 4.2"
 
 group :development, :test do
   gem 'rspec-rails'
