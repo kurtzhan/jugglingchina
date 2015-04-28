@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 9) do
+ActiveRecord::Schema.define(:version => 10) do
 
   create_table "brain_busters", :force => true do |t|
     t.string "question"
@@ -165,6 +165,10 @@ ActiveRecord::Schema.define(:version => 9) do
     t.string   "display_name"
     t.string   "permalink"
     t.integer  "logs_count",                              :default => 0
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["last_seen_at"], :name => "index_users_on_last_seen_at"

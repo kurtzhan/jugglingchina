@@ -34,7 +34,10 @@
 
 <br />
 
-<%= form_for @user do |f| %>
+<%= form_for @user, :html => { :multipart => true } do |f| %>
   <%= render :partial => "contact_info", :locals => { :settings => f } %>
+  <%= f.file_field :avatar %>
   <%= submit_tag I18n.t('txt.views_users.update_profile', :default => 'Update profile') %> <%= I18n.t 'txt.or', :default => 'or' %> <%= link_to(I18n.t('txt.cancel', :default => 'Cancel'), user_path(@user)) %>
 <% end %>
+
+<%= image_tag @user.avatar.url(:thumb) %>
